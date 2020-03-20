@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Game Jam Entries
-permalink: /gamejam/
+permalink: /gamejam
 ---
 # Game Jam Submissions
 
