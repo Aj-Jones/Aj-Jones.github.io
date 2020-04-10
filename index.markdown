@@ -11,6 +11,3 @@ Entries from the past couple years of the Ludum Dare game jam.
 
 # [Resume](/online-cv)
 Online version of my resume.
-
-# [Current Projects](/currentprojects)
-What I'm currently working on.
