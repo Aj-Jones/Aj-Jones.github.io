@@ -5,10 +5,15 @@ permalink: /gamejam
 ---
 # Game Jam Submissions
 
+## Feed Hole, Ludum Dare 46
+<iframe src="https://itch.io/embed/620607" width="552" height="167" frameborder="0"><a href="https://overtechstudios.itch.io/feed-hole">Feed Hole (LD46) by Overtech Studios</a></iframe>
+
+**Feed Hole** was my most recent submission to Ludum Dare, and was a fantastic chance to work with some friends. The theme was "Keep it alive" and we decided the best way to do that, was feeding power cores to a sentient AI.  This project offered so many different things to work on and learn from. We created our own base class, and defined specific update loops for different types of entities. This allowed us to manage the lifecylce of objects much more specifically, and was a great lesson in game state and overall structure. Additionally, I got to experiment with some procedural animation, and work with our sound guy to implement FMOD into the project. Lastly, getting it compressed and working decently on WebGL (within the jam window) was an awesome challenge at the finish line.
+
 ## Celia's Lightmare, Ludum Dare 45
 <iframe src="https://itch.io/embed/497921" width="552" height="167" frameborder="0"><a href="https://overtechstudios.itch.io/celias-lightmare">Celia's Lightmare by Overtech Studios</a></iframe>
 
-**Celia's Lightmare** was my most recent submission to Ludum Dare, placing 164th overall, based on the theme "Start With Nothing". Our goal was a atmospheric shooter that had a fun gameplay loop. Each time you collect enough power from the enemies, you can respawn with a multiplier, but lose everything else "Starting with Nothing". Each time you respawn the enemies get tougher. This entry was a great exercise in project management, event driven UI programming, and creating a gamestate that could be easily manipulated.
+**Celia's Lightmare** was a super enjoyable LD submission, placing 164th overall, based on the theme "Start With Nothing". Our goal was a atmospheric shooter that had a fun gameplay loop. Each time you collect enough power from the enemies, you can respawn with a multiplier, but lose everything else "Starting with Nothing". Each time you respawn the enemies get tougher. This entry was a great exercise in project management, event driven UI programming, and creating a gamestate that could be easily manipulated.
 
 ## ImminENT Danger, Ludum Dare 43
 <iframe src="https://itch.io/embed/339222" width="552" height="167" frameborder="0"><a href="https://overtechstudios.itch.io/imminent-danger">ImminENT Danger (Ludum Dare 43  Entry) by Overtech Studios</a></iframe>

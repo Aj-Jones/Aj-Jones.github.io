@@ -5,9 +5,13 @@
 layout: default
 
 ---
+# [Current Project](/current)
+Current project I'm working on.
+
 # [Game Jam Entries](/gamejam)
 Entries from the past couple years of the Ludum Dare game jam. 
 
-
 # [Resume](/online-cv)
 Online version of my resume.
+
+
