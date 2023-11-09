@@ -30,7 +30,7 @@ For a more thorough breakdown of what I did and learned, check out my [retrospec
 ><a href="https://www.seussville.com/dr-seuss-simulator-game-on-roblox/">![Dr Seuss Simulator](/assets/img/drseuss.png)</a>
 >Description  
 
-Brief statement & link to retro
+*WIP Brief statement & link to retro*
 <br>
 
 # [Personal Projects](/personalprojects)
