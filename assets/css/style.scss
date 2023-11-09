@@ -1,0 +1,43 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+body {
+    background-color: #313638;
+}
+
+
+a{
+    color: #EF6461;
+}
+
+a:hover{
+    color: #8DBFC5;
+}
+
+h1{
+    color: #E8E9EB;
+}
+
+h2,h3,body{
+    color: #E0DFD5;
+}
+
+h3{
+    color: #E0DFD5;
+}
+
+body{
+    header{
+        //background-color: #124764 ;
+    
+    }
+}
+
+code,pre,strong{
+    color: #8DBFC5;
+}
+
+
+//Color Pallete: https://coolors.co/ef6461-e4b363-e8e9eb-e0dfd5-313638 

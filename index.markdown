@@ -5,13 +5,16 @@
 layout: default
 
 ---
-# [Current Project](/current)
-Current project I'm working on.
+# [Projects](/projects)
+Projects I've worked on!
 
-# [Game Jam Entries](/gamejam)
-Entries from the past couple years of the Ludum Dare game jam. 
+# [Retrospectives](/retrospectives)
+Reflection on my various projects, what I did and what I learned.
 
-# [Resume](/online-cv)
+# [Game Jam Entries](/gamejams)
+Entries from some old Ludum Dare game jams. 
+
+# [Resume](https://aj-jones.github.io/online-cv/)
 Online version of my resume.
 
 
