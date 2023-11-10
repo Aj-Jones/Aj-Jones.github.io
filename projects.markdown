@@ -37,7 +37,15 @@ I started off helping solve bugs related to desynchronization between the client
 ><a href="https://www.seussville.com/dr-seuss-simulator-game-on-roblox/">![Dr Seuss Simulator](/assets/img/drseuss.png)
 > Dr Suess Simulator was a licensed Roblox experience for the Dr Seuss Enterprises.</a>
 
-While working on Legendary DXP, I was offered some aditional contracting work for **Dr Seuss Simulator**. I worked on setting up the IAP system and save data management, as well as providing gameplay scripting support. It was a great learning experience in working with a third party API and designing flexible data organization for use with limited API calls. It also helped re-enforce how to design code for client/server architecture.
+While working on Legendary DXP, I was offered some aditional contracting work for **Dr Seuss Simulator**. I worked on setting up the IAP system and save data management, as well as providing gameplay scripting support. It was a great learning experience in working with a third party API and designing flexible data organization for use with limited API calls. It also helped re-enforce how to design code for client/server architecture. At a high level, this allowed me to gain experience in:
+- Integrating with third party API's
+- Learning and using a new language (lua)
+- Save Data Management
+- Server side validation.
+- Common gameplay scripting tasks
+    - Item collection
+    - Object interaction
+    - Mini-Games
 
 
 <br>
