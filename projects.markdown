@@ -22,7 +22,13 @@ For a more in depth reflection on this project check out my [retrospective here.
 > Legendary DXP is a digital version of the tabletop card game Legendary. Play against friends, foes, or AI in this deck building card game.</a>
 
 **Legendary DXP** was the start of my game development career. It was a great opportunity to start learning more aspects of game development outside programming within an engine, such as client server architecture, Node.js, and SQL databases.
-For a more thorough breakdown of what I did and learned, check out my [retrospective here.](/retros/legendary)
+I started off helping solve bugs related to desynchronization between the client and server, and quickly moved on to helping build a bug resolution process, creating tools to check and report server status, and eventually working on the foundations for Legendary DXP: 007. During this time, I gained the experience of working on a multi-platform live service game which included the following aspects.
+- Server side logic for the core functionality of the game.
+- Client side logic for client interaction and rendering of the game state.
+- Tool and Process creation for better management of bugs.
+- Product submission to various storefronts, live-ops, and overall project support.
+- Customer Support
+- Database management
 
 <br>
 
