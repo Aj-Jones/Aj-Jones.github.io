@@ -1,9 +1,10 @@
 ---
-layout: post
+layout: retro
 title:  "Legendary Retrospective"
 image: /assets/img/legendary.png
-categories: work legendary retro unity nodejs
-permalink: /retro-legendary/
+category: retros
+tags: work legendary retro unity nodejs
+permalink: /retros/legendary/
 ---
 
-WIP
+*WIP*

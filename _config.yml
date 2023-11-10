@@ -1,14 +1,10 @@
 title: Aj Jones
 logo: /assets/img/profile.png
-description: >-
-  Software Engineer </br>
-
-  B.S. Computer Science</br>
-  Cal State San Marcos. </br>
+description:
+  Software Engineer <br> 
+  B.S. Computer Science <br> 
+  Cal State San Marcos.  <br>
   Check out <a href="https://www.welltold.games/the-foglands">The Foglands!</a>
-
-  
-#github_username:  Aj-Jones
 
 github:
   is_project_page: false
@@ -20,5 +16,8 @@ github:
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
 - jekyll-remote-theme
-  
- 
+
+
+
+exclude: 
+ - _posts/templates/

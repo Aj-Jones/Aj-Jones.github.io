@@ -3,10 +3,13 @@ layout: default
 title: Retrospectives
 permalink: /retrospectives
 ---
+# Retrospectives  
 
-{% for post in site.posts %}
-    {% if post.image %}
-<a href="{{post.url}}">![]({{post.image}})</a>
-    <br> 
-    {% endif %}
-{% endfor %}
+<br>
+
+># [![Foglands](/assets/img/foglands.png)](/retros/foglands)  
+
+<br>  
+
+># [![Legendary](/assets/img/legendary.png)](/retros/legendary)
+
