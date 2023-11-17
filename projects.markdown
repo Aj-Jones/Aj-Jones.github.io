@@ -55,7 +55,7 @@ While working on Legendary DXP, I was offered some aditional contracting work fo
 
 
 # [Game Jams](/gamejams)
->Old game jam entries.  
+>Very old game jam entries.  
 
 
 
