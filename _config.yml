@@ -2,8 +2,8 @@
 title               : Aj Jones Portfolio
 description         : >-
     Senior Software Engineer | Game Dev
-    Ex-Netflix, Demiurge Studios, and Well Told Entertainment
-    B.S. Computer Science 
+    <br>Netflix | Demiurge Studios | Well Told Entertainment <br>
+    <br>B.S. Computer Science |
     Cal State San Marcos.
 baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 remote_theme        : yousinix/portfolYOU
