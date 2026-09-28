@@ -1,0 +1,63 @@
+- title: Senior Gameplay Engineer | Night School Studios @ Netflix Games
+  from: 2024
+  to: 2026
+  description: |
+    Unhinged — First-Person Narrative Horror Game with Interactive Controller Experience<br>
+    - Owned the gameplay input and control architecture supporting a second-screen interactive controller experience.<br>
+    - Designed and implemented core interaction, navigation, camera, and player-control systems and supporting tools.<br>
+    - Built a simulated mobile-phone controller application that connected to live game sessions and provided both gameplay input and an interactive display.<br>
+    <br>
+    Unreal Strike Team<br>
+    - Served as Technical Lead for a 20-person strike team responsible for transitioning studio development to Unreal Engine and establishing foundational Unreal tooling and workflows.<br>
+    - Led the integration and expansion of internal SDKs, deploying them to cloud infrastructure and exceeding performance targets through optimization and content-loading strategies.<br>
+    - Onboarded developers to Unreal Engine development, Blueprints, C++, Swarm, iteration practices, and code review.<br>
+
+
+- title: Software Engineer 2 | Demiurge Studios
+  from: 2024
+  to: 2024
+  description: |
+   Co Development work on Bismuth, a unreleased game from Phoenix Labs. <br>
+    - Built a fully featured Character Creation system, including item unlocks and skill choice.<br>
+    - Created login and account linking system supporting, Epic, Steam and Google Play.<br>
+    - Designed and implemented back and front end of Social API with Friends, blocklists, invites and player profiles. <br>
+    - Migrated multi-game CI/CD pipeline from self-hosted jenkins pipeline to cloud based Github Actions pipeline.<br>
+
+    <br><br>Co Development Work on Marvel Snap. <br>
+    - Live Service Support and In App Purchase Feature Development.
+
+
+- title: Lead Engineer | Well Told Entertainment
+  from: 2020
+  to: 2023
+  description: Led Engineering team on the Foglands, a VR/FPS Roguelite action game. <br>
+              - Built and maintained core gameplay features including procedural generation, AI behavior systems, and core combat and interaction frameworks.<br>
+              - Developed narrative pipeline that managed script integration into Unreal Engine, and narrative performace with UE and WWise. <br>
+              - Optimized and refined to achieve >72fps with a scaled high/low res across PSVR2 and Meta Quest.<br>
+              - Grew engineering team through hiring and mentorship of associate staff.<br>
+              - Collaborated with production and product management for sprint planning, timelines and milestones.<br>
+
+
+
+- title: Associate Developer | Skyreacher Entertainment
+  from: 2018
+  to: 2020
+  description: |
+    Gameplay and Server Programming on Legendary DXP, and DXP 007. Gameplay and Save Data Scripting on a Licensed Roblox Experience for Dr Seuss.<br>
+    <br>
+      - Built IAP and Save Data management system for licensed F2P game with > 5m plays. <br>
+      - Verified and fixed key functionality for a live service Unity game across iOS, Android, and Steam, by independent testing, and reviewing user submitted reports. <br>
+      - Built Server logic to validate gameplay requests, IAPs, and client logic to display game state. <br>
+
+- title: B.S. Computer Science | Cal State San Marcos
+  from: 2018
+  to: 2021
+  description: 2018-2021 Deans List
+
+- title: Client Systems Technician | United States Air Force
+  from: 2014
+  to: 2018
+  description: Primary point of contact and subject matter expert for IT support. <br>
+               Promoted six months early to Senior Airman, and made Staff Sergeant at first test opportunity. <br>
+               Obtained A+ and Security+ certifications.
+

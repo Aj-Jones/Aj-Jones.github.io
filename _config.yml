@@ -1,22 +1,62 @@
-title: Aj Jones
-logo: /assets/img/profile.png
-description:
-  Software Engineer | Game Dev | Dad <br> 
-  B.S. Computer Science <br> 
-  Cal State San Marcos.  <br>
-  Check out <a href="https://www.welltold.games/the-foglands">The Foglands!</a>
-
-github:
-  is_project_page: false
-  is_user_page: false
-
+### Site Settings ###
+title               : Aj Jones Portfolio
+description         : >-
+    Senior Software Engineer | Game Dev
+    Ex-Netflix, Demiurge Studios, and Well Told Entertainment
+    B.S. Computer Science 
+    Cal State San Marcos.
+baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+remote_theme        : yousinix/portfolYOU
+open_new_tab        : false                    # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 
-# Build settings
-remote_theme: pages-themes/minimal@v0.2.0
+
+### Plugins ###
 plugins:
-- jekyll-remote-theme
+  - jemoji
 
 
-exclude: 
- - _posts/templates/
+### Navbar Settings ###
+nav_exclude:                                            # The following paths are excluded from navbar
+  - pages/tags.html
+  - pages/404.html
+  - pages/index.md
+
+
+### Author Info ###
+author:
+  name              : Aj Jones 
+  image             : /assets/img/profile.png
+  email             : ajjonesgamedev@gmail.com 
+  linkedin          : https://www.linkedin.com/in/aj-jones/
+
+
+### Posts ###
+permalink: /blog/:title
+
+
+### Collections ###
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name
+
+### Defaults for collections ###
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: false                                   # Set to true to enable disqus comments
+
+### Exclude from processing ###
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - "*.log"
