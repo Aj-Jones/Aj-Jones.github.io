@@ -9,10 +9,10 @@ description: "A breakdown of how to take a design spec or inspiration, and use G
 # Overview
 Hey there!
 
-In the last few months prior to the layoffs at Netflix that impact myself and the rest of Night School, I was serving as the Tech Lead on a 20 member strike team established to transition the studio from Unity to Unreal Engine.
-As folks ramped on and were diving into the engine, I ran intro meetings and regular help sessions to walk folks through various features, review their work, and help the team learn how to collaborate and prototype in the new engine.
+In the months prior to the layoffs at Netflix that impacted myself and the rest of Night School Studios, I was serving as the Tech Lead on a 20 member strike team established to transition the studio from Unity to Unreal Engine.
+As folks ramped on and were diving into the engine, I ran intro meetings and regular help sessions to walk folks through various features, review their work, and help the team learn how to collaborate and prototype in the new engine. 
 
-One feature I love using in UE projects, and one that lacks a fair amount of documentation, is the Gameplay Ability System (GAS).
+One feature I love using in UE projects, and one that was already well in use in our Strike Team, is the Gameplay Ability System (GAS).
 I find it to be a fantastic framework not just for implementing your game's logic, but for helping translate ideas into their data, logic and components.
 
 In this post, I'll be walking through an example of how GAS can be used to build a multi-phased boss fight inspired by the Akkha fight in the Tombs of Amascut raid from Old School Runescape.
@@ -30,16 +30,16 @@ If you are new to the Gameplay Ability System and looking to expand your knowled
 
 My goal isn't to demonstrate "the one way to use GAS" or a step by step tutorial, but to show the flexibility GAS affords, and how the GAS framework can be used to translate a pitch into a prototype.
 
-Let's dive in!:wa
+Let's dive in!
 
 
 # The Pitch
 
 The Akkha boss fight has two main phases:
-* Phase 1: Main Fight: Auto attacks using a varying damage type, and is vulnerable to a varying damage type. Will ocassionally trigger special attacks.
-* Phase 2: Enrage phase: Becomes immune to all but Melee damage, spawns clones of himself, and teleports to a new clone's spot after being hit 3 times. The player needs to dodge a field of moving explosives while attempting to defeat the boss.
+* Phase 1: Main Fight: Akkha attacks every few seconds using a varying damage type, and is vulnerable to a varying damage type. Will ocassionally trigger special attacks as the attack style changes.
+* Phase 2: Enrage phase: Becomes immune to all but Melee damage, spawns clones of himself, and teleports to a new clones spot after being hit 3 times. The player needs to dodge a field of moving explosives while attempting to defeat the boss.
 
-> In this example, Akkha and the player will share the abilities for their auto attacks. I'll cover ways to make that easy to setup!
+> In this example, Akkha and the player will share the abilities for their auto attacks. I'll cover ways to make that easy to setup in GA_MeleeAttack
 
 The auto-attacks Akkha uses are the combat triangle in Old School Runescape. Melee, Ranged, and Magic.
 He will swap between them every so often, and is immune to damage of the same style he attacks with.
@@ -49,8 +49,6 @@ He will swap between them every so often, and is immune to damage of the same st
 <br>
 
 
-When switching attack specials, Akkha can trigger special attacks to introduce additional complexity.
-
 Now that we have an understanding of the encounter flow, it's time to break that down into the appropriate pieces.
 
 # The Breakdown
@@ -58,7 +56,7 @@ Now that we have an understanding of the encounter flow, it's time to break that
 Abilities are attacks and actions taken by a character. Our auto attacks, specials, and some utility functionality will all be abilities.
 
 ![Abilities](/assets/img/akkha/akkha_abilities.png)
-* `GA_CloneSpecial` - Akkha spawns clones in each quadrant. While a clone is present in a quadrant, akkha can not be damaged from within it. Players must destroy the clone to attack Akkha. Undestroyed clones will damage all characters in their respective quadrants.
+* `GA_CloneSpecial` - Akkha spawns clones in each quadrant. While a clone is present in a quadrant, Akkha can not be damaged from within it. Players must destroy the clone to attack Akkha. Undestroyed clones will damage all characters in their respective quadrants.
 
 * `GA_Enrage` - Akkha spawns his clones, heals himslef, becomes immune to everything except melee, and teleports after being hit 3 times. Meanwhile, the player must avoid explosive orbs while they attempt to defeat the boss.
 
@@ -85,7 +83,7 @@ Once again, let's break these into their component categories:
 <br>
 * Gameplay Tags - String based hierarchical labels that can be used for just about everything. i.e. `Character.State.IsDead` and `Combat.AutoAttack.Cooldown` are examples of a few tags.
 
-> I suggest defining Gameplay Tags as Native Tags in C++. This makes their use in C++ much easier, as you have a direct reference rather than a string that needs to be typed (and mistyped) all over.
+> Defining Gameplay Tags as Native Tags in C++ is helps any time you may reference a tag in code. It makes references easier as you have a direct reference rather than a string that needs to be typed (and mistyped) all over, and is still accesible in editor.
 
 * Gameplay Effects - Effects will initialize attributes, drive changes to them, and grant and remove gameplay tags as appropriate. Effects can be selectively applied, remove others, and apply additional effects based on the GameplayTags present.
 
@@ -94,11 +92,12 @@ Once again, let's break these into their component categories:
 
 #### Components and UE Objects
 ![Objects](/assets/img/akkha/akkha_objects.png)
-For Akkha's quadrant based specials, we'll make a convienience class that contains the spawn points, colliders and indicators for the quadrant, as well as logic for spawning clones and handling Akkha's immunity. `BP_AkkhaQuadrant`
+For Akkha's quadrant based specials, we'll make a convienience class that contains the spawn points, colliders and indicators for the quadrant, as well as logic for spawning clones and handling Akkha's immunity. `BP_AkkhaQuadrant`. These will be used in the Simon Says, Clone, and Enrage Specials to show the appropriate visuals for the special attack, apply damage to characters in the quadrant, and apply immunity to Akkha when appropriate.
 
-To access these quadrants, we'll make a boss singleton blueprint that lives in the scene. It will contain the references to the in world objects, and have the logic to spawn the boss. `BP_AkkhaManager`
+To access these quadrants, we'll make a boss singleton blueprint that lives in the scene. It will contain the references to the in world objects, and have the logic to spawn the boss. `BP_AkkhaManager`.
 
 For the Projectile Auto Attack, we'll need a projectile to handle collision, damage dealing, and different visuals based on type. `BP_ProjectileBase`
+These will be spawned by `GA_ProjectileAttack`.
 
 For the Orb Attack, we'll need orbs that explode on contact and deal Damage over time to the player. `BP_ExplosionOrb`
 
@@ -139,6 +138,8 @@ The interesting logic is within the ApplyDamage function.
 ![Melee](/assets/img/akkha/akkha_melee_dmg.png)
 
 Here you can see we source the radius for the sphere trace from the AttackRange attribute. By doing this rather than hard coding, we can ensure any changes to the core attributes are respected in this logic.
+
+> Notice all the references to Character come from the Avatar Actor from Actor Info. During initialization of the Ability System Component, have an established standard of what AvatarActor and OwnerActor will mean in your project. In mine the owner is the PlayerState, and the AvatarActor is the Character they are controlling.
 
 #### Handling Damage Types and Immunity
 Remember the combat triangle, and damage types? 
@@ -222,6 +223,30 @@ Then create a gameplay cue and assign the same tag in its class settings.
 ![MeleeCueImplementation](/assets/img/akkha/cue_melee_implementation.png)
 
 
+#### Taking the concepts to other abilities
+
+
+##### Projectile Ability
+
+Using our BP_ProjectileBase class, we can make another attack ability that spawns a projectile instead of doing a sphere trace.
+![Projectile](/assets/img/akkha/projectile_spawn.png)
+
+We'll set the projectile's owner to be the ability owner, and assign our Attack Style (either Ranged or Mage), and assign an appropriate target.
+If the ability is being used by the boss, IsPlayer is false, and we simply just get the player.
+Otherwise, we trace for a target, and assign it if so. This is then set as the homing target on our projectile.
+
+IsPlayer and the Attack Style variable are easy tag queries to run in ability initialization.
+![TagData](/assets/img/akkha/tag_data.png)
+
+
+Finally, for the projectile to actually apply damage, we simply check overlap to ensure we aren't hitting our owner, and that we're hitting something with an Ability System Component, and apply the damage spec accordingly.
+
+![ProjectileDamage](/assets/img/akkha/projectile_damage.png)
+
+> Don't forget to commit your ability and end it at appropriate times. For projectile, I start the animation and only commit once the notify is recieved. The ability is ended as soon as the animation finishes or is interrupted.
+
+##### Abilities that track
+
 #### Interaction Between Abilities
 
 Now that we have our core pieces in place, I'll cover how to use tags to control interaction between abilities.
@@ -242,15 +267,29 @@ Here we can check if we are either the player, or are in range of our active tar
 `GA_StayInRange` is a persistent ability that continuously runs, unless blocked by tags. It provides the `Combat.InRangeOfTarget` tag when near the target, and moves the boss to the target otherwise.
 ![StayInRange](/assets/img/akkha/ga_stayinrange.png)
 
+
+Here is an example of the Ability Tags for `GA_Enrage`.
+![EnrageTags](/assets/img/akkha/enrage_tags.png)
+Here, we cancel and block all other abilities, as Enrage takes priority over everything.
+
+For more coordination with a wide variety of characters, and not as bespoke for a single purpose, consider creating Attack channels in gameplay tags, such as 
+* Combat.PrimaryAttack
+* Combat.SecondaryAttack
+* Combat.SpecialAttack1
+* Combat.SpecialAttack2
+* Combat.SpecialAttack3
+
+So you can block entire sets of abilities without needing to supply every possiblity.
+
 ## Hooking it all up
 
-We've got some abilities, and attributes, but these need to make their way to the characters. Characters should already be setup with their `Ability System Components` and `Attribute Sets`, if not [this is a good community tutorial covering initial setup](https://dev.epicgames.com/community/learning/tutorials/8Xn9/unreal-engine-epic-for-indies-your-first-60-minutes-with-gameplay-ability-system)
+We've got some abilities, and attributes, but these need to make their way to the characters. Characters should already be setup with their `Ability System Components` and `Attribute Sets`, if not [here is a good community tutorial](https://dev.epicgames.com/community/learning/tutorials/8Xn9/unreal-engine-epic-for-indies-your-first-60-minutes-with-gameplay-ability-system) covering initial setup.
 
 As mentioned previously, I'm using a singleton to manage this boss encounter, `BP_AkkhaManager`
 
 ![AkkhaManager](/assets/img/akkha/akkha_manager.png)
 
-It contains the designer tuneable variables that control the overall encounter, references to in world objects used by abilities and ensures those objects exist.
+It contains the designer tuneable variables that control the overall encounter, references to in world objects used by abilities and ensures those objects exist. Abilities can simply find this one object to interface with the level hazards and ability tuning.
 
 > Once prototyping is completed, moving these variables into a data asset for easy searchability and config is a big QOL boost!
 
@@ -295,7 +334,7 @@ Whew! Lots of moving parts! One common criticism of GAS is the amount of assets 
 While it is true that you will be making a fair amount, it's nothing sensible folder structure and data management can't take care of.
 
 The real strenght comes from these many simple assets having the flexibility and power to be used in conjunction with one another.
-On [The Foglands](/retros/foglands) I used GAS to manage our Roguelite abilities and upgrades. The player unlocked cards that awarded effects and abilities to modify damage and trigger addtional abilities. Using GameplayTags to define our core Gameplay verbs (Shoot, Punch, Jump, Hit) let us easily make abilities and effects that responded to those tag events. This led to some awesome emergent gameplay and wacky combinations that regularly suprised us.
+On [The Foglands](/retros/foglands) I used GAS to manage our roguelite abilities and upgrades. The player unlocked cards that awarded effects and abilities to modify damage and trigger addtional abilities. Using GameplayTags to define our core Gameplay verbs (Shoot, Punch, Jump, Hit) let us easily make abilities and effects that responded to those tag events. This led to some awesome emergent gameplay and wacky combinations that regularly suprised us.
 
 I hope you see the ease at which you can get dynamic encounters scripted up, with just a bit of planning and data identification.
 If you have any questions on the abilities and effects I did not cover, please do not hesitate to reach out!
