@@ -7,6 +7,8 @@ permalink: /techblog/akkha/
 description: "A breakdown of how to take a design spec or inspiration, and use GAS to create a boss encounter."
 ---
 # Overview
+{% include elements/video.html id="syhYrrSRCyY" %}
+
 Hey there!
 
 In the months prior to the layoffs at Netflix that impacted myself and the rest of Night School Studios, I was serving as the Tech Lead on a 20 member strike team established to transition the studio from Unity to Unreal Engine.
