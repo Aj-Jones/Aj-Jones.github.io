@@ -112,7 +112,7 @@ For the player we'll use the default character with the same auto-attacks Akkha 
 
 Now that we have a good idea of all the pieces we need, we can get to work.
 
-I started with my AttributeSets and GameplayTags. Having these identified will help us configure our abilities and effects with some structure in mind.
+I started with my `AttributeSets` and `GameplayTags`. Having these identified will help us configure our abilities and effects with some structure in mind.
 
 HealthAttributeSet
 * Health
@@ -135,7 +135,7 @@ To see how that works, let's take a look at implementing an ability, in this cas
 ![Melee](/assets/img/akkha/akkha_melee.png)
 This is a pretty straightforward ability which when executed it plays an Animation, and waits for an AnimNotify to attempt to apply damage.
 
-The interesting logic is within the ApplyDamage function.
+The interesting logic is within the `ApplyDamage` function.
 
 ![Melee](/assets/img/akkha/akkha_melee_dmg.png)
 
@@ -165,7 +165,7 @@ void UGASUtilFunctionLibrary::AddCombatDataToSpec(FGameplayEffectSpecHandle& Spe
 ```
 > Tossing this into a Blueprint Function Library makes re-use across the project a breeze!
 
-Rather than needing to determine if the player is immune before sending the damage spec, we can instead modify our HealthAttributeSet to take immunity into account.
+Rather than needing to determine if the player is immune before sending the damage spec, we can instead modify our `HealthAttributeSet` to take immunity into account.
 As previously mentioned, Damage is a meta-attribute, meaning it applies changes to another attribute. 
 > For more information on Meta Attributes, [check here!](https://github.com/tranek/GASDocumentation#concepts-a-meta)
 
@@ -210,7 +210,7 @@ if (Data.EvaluatedData.Attribute == GetDamageAttribute())
 
 With this in place, any damage done that a player has immunity to is easily ignored.
 
-Gaining immunity is as simple as granting the effect with the correct tag. Here's GE_MeleeDefence
+Gaining immunity is as simple as granting the effect with the correct tag. Here's `GE_MeleeDefence`
 ![MeleeProtect](/assets/img/akkha/ge_meleeprotect.png)
 
 > If you are sure you're applying your effects, but queries are failing, make sure your GE is set to Infinite. Instant effects DO NOT grant their tags to the target of the effect.
@@ -230,7 +230,7 @@ Then create a gameplay cue and assign the same tag in its class settings.
 
 ##### Projectile Ability
 
-Using our BP_ProjectileBase class, we can make another attack ability that spawns a projectile instead of doing a sphere trace.
+Using our `BP_ProjectileBase` class, we can make another attack ability that spawns a projectile instead of doing a sphere trace.
 ![Projectile](/assets/img/akkha/projectile_spawn.png)
 
 We'll set the projectile's owner to be the ability owner, and assign our Attack Style (either Ranged or Mage), and assign an appropriate target.
@@ -241,7 +241,7 @@ IsPlayer and the Attack Style variable are easy tag queries to run in ability in
 ![TagData](/assets/img/akkha/tag_data.png)
 
 
-Finally, for the projectile to actually apply damage, we simply check overlap to ensure we aren't hitting our owner, and that we're hitting something with an Ability System Component, and apply the damage spec accordingly.
+Finally, for the projectile to actually apply damage, we simply check overlap to ensure we aren't hitting our owner, and that we're hitting something with an `Ability System Component`, and apply the damage spec accordingly.
 
 ![ProjectileDamage](/assets/img/akkha/projectile_damage.png)
 
@@ -274,7 +274,7 @@ Here is an example of the Ability Tags for `GA_Enrage`.
 ![EnrageTags](/assets/img/akkha/enrage_tags.png)
 Here, we cancel and block all other abilities, as Enrage takes priority over everything.
 
-For more coordination with a wide variety of characters, and not as bespoke for a single purpose, consider creating Attack channels in gameplay tags, such as 
+For more coordination with a wide variety of characters, and not as bespoke for a single purpose, consider creating Attack channels using `Gameplay Tags`, such as 
 * Combat.PrimaryAttack
 * Combat.SecondaryAttack
 * Combat.SpecialAttack1
@@ -295,7 +295,7 @@ It contains the designer tuneable variables that control the overall encounter, 
 
 > Once prototyping is completed, moving these variables into a data asset for easy searchability and config is a big QOL boost!
 
-The next piece in the chain is the AI Controller for our boss. It simply grants our abilities to the boss as desired.
+The next piece in the chain is the `AI Controller` for our boss. It simply grants our abilities to the boss as desired.
 
 ![AkkhaController](/assets/img/akkha/akkha_controller.png)
 
@@ -315,9 +315,9 @@ and finally listens to health changes.
 With just those few functions, and our ability set, we can now script this boss fight with no problem.
 
 ![AkkhaBrain1](/assets/img/akkha/akkha_brain_1.png)
-Attacks and Specials are all triggered via tag, and use the Required/Blocked Tag configuration and cooldowns to ensure abilities are being triggered in the correct scenario.
+Attacks and Specials are all triggered via tag, and use the `Required/Blocked Tag` configuration and cooldowns to ensure abilities are being triggered in the correct scenario.
 
-Switching attack styles is done by applying the correct Gameplay Effect.
+Switching attack styles is done by applying the correct `Gameplay Effect`.
 ![AkkhaBrain2](/assets/img/akkha/akkha_brain_2.png)
 
 Each time we switch styles, we flip a coin and choose one of our other specials to activate.
@@ -335,22 +335,22 @@ Finally, when we reach enrage, we stop our timers, and activate our Enrage abili
 Whew! Lots of moving parts! One common criticism of GAS is the amount of assets that get created.
 While it is true that you will be making a fair amount, it's nothing sensible folder structure and data management can't take care of.
 
-The real strenght comes from these many simple assets having the flexibility and power to be used in conjunction with one another.
-On [The Foglands](/retros/foglands) I used GAS to manage our roguelite abilities and upgrades. The player unlocked cards that awarded effects and abilities to modify damage and trigger addtional abilities. Using GameplayTags to define our core Gameplay verbs (Shoot, Punch, Jump, Hit) let us easily make abilities and effects that responded to those tag events. This led to some awesome emergent gameplay and wacky combinations that regularly suprised us.
+The real strength comes from many simple assets having the flexibility and power to be used in conjunction with one another.
+On [The Foglands](/retros/foglands) I used GAS to manage our roguelite abilities and upgrades. The player unlocked cards that awarded effects and abilities to modify damage and trigger addtional abilities. Using `GameplayTags` to define our core Gameplay verbs (Shoot, Punch, Jump, Hit) let us easily make abilities and effects that responded to those tag events. This led to some awesome emergent gameplay and wacky combinations that regularly suprised us.
 
 I hope you see the ease at which you can get dynamic encounters scripted up, with just a bit of planning and data identification.
 If you have any questions on the abilities and effects I did not cover, please do not hesitate to reach out!
 
 tldr;
 
-* Start by identifying your desired actions, these will become your Gameplay Abilities.
-* Determine what data is needed for those actions to function and for them to apply the desired impact to the game state. These will become Effects and Tags.
-    * Create your Attribute Sets to group attributes of similar domains together.
+* Start by identifying your desired actions, these will become your `Gameplay Abilities`.
+* Determine what data is needed for those actions to function and for them to apply the desired impact to the game state. These will become `GameplayEffects` and `GameplayTags`.
+    * Create your `Attribute Sets` to group attributes of similar domains together.
     * Implement custom processing of effects in `UAttributeSet::PostGameplayEffectExecute`
-* Using Gameplay Tags, identify any relevant statefulness needed for abilities to activate, and configure your `Gameplay Ability` class defaults as appropriate.
-    * Use both Requirement tags, cooldown effects, and CanActivateAbility overrides to control when an ability is allowed to activate.
-    * Use Blocked tags to ensure specified abilities are not allowed to trigger while the current one is executing. Cancelled tags to cancel ones currently active.
-* Sequence the encounter using a persistent Gameplay Ability that triggers the desired logic, and responds to attribute and tag changes.
+* Using `Gameplay Tags`, identify any relevant statefulness needed for abilities to activate, and configure your `Gameplay Ability` class defaults as appropriate.
+    * Use both `Requirement tags`, Cooldown effects, and `CanActivateAbility` overrides to control when an ability is allowed to activate.
+    * Use `Blocked tags` to ensure specified abilities are not allowed to trigger while the current one is executing. `Cancelled tags` to cancel ones currently active.
+* Sequence the encounter using a persistent `Gameplay Ability` that triggers the desired logic, and responds to attribute and tag changes.
 
 
 This project was really enjoyable to work on, and was a great test case to build out this tutorial-lite post.
