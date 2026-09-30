@@ -247,8 +247,6 @@ Finally, for the projectile to actually apply damage, we simply check overlap to
 
 > Don't forget to commit your ability and end it at appropriate times. For projectile, I start the animation and only commit once the notify is recieved. The ability is ended as soon as the animation finishes or is interrupted.
 
-##### Abilities that track
-
 #### Interaction Between Abilities
 
 Now that we have our core pieces in place, I'll cover how to use tags to control interaction between abilities.
