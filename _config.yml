@@ -21,7 +21,6 @@ nav_exclude:                                            # The following paths ar
   - pages/tags.html
   - pages/404.html
   - pages/index.md
-  - pages/drafts/boss-clone-gas.md
 
 
 ### Author Info ###
